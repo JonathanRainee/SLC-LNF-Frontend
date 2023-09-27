@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from "react";
-import dynamic from "next/dynamic";
-const url = process.env.NEXT_PUBLIC_EXPRESS_API_URL
+  import dynamic from "next/dynamic";
+  const url = process.env.NEXT_PUBLIC_EXPRESS_API_URL
 
 function formatDate(dateString: string) {
   if (!dateString) {
@@ -39,9 +39,9 @@ function ClientSideHomeComponent() {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-xs">
+      <table className="table table-sm table-zebra ">
         <thead>
-          <tr>
+          <tr className="text-lg border-t border-black">
             <td>Name</td>
             <td>Description</td>
             <td>Found At</td>
@@ -49,12 +49,19 @@ function ClientSideHomeComponent() {
             <td>Type</td>
           </tr>
         </thead>
-        <tbody>
-          {data.map((d: any) => (
-            <tr key={d.id}>
+        <tbody className="text-lg text-neutral-50 font-medium">
+          {data.map((d: any, index: number) => (
+            <tr
+              key={d.id}
+              className={`text-sm ${
+                index % 2 === 0
+                  ? 'odd:bg-blue-400 odd:text-white'
+                  : 'even:bg-white even:text-blue-500'
+              } hover:bg-blue-200 border-t border-black`}
+            >
               <td>{d.name}</td>
               <td>{d.description}</td>
-              <td>{d.foundAt}</td>
+              <td className="">{d.foundAt}</td>
               <td>{formatDate(d.foundDate)}</td>
               <td>{d.type}</td>
             </tr>
