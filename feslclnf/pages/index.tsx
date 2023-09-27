@@ -3,14 +3,16 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import handler from './api/items'
+import Link from 'next/link'
 
 export default function Home({data}) {
 
   const [items, setItems] = useState([])
-  // console.log('data: ', data);
+  
   useEffect(()=>{
     setItems(data)
   }, [data])
+
 
   return (
     <div className="overflow-x-auto m-4">
@@ -24,15 +26,13 @@ export default function Home({data}) {
             <td>Type</td>
           </tr>
         </thead>
-        <tbody className="text-lg text-neutral-50 font-medium">
+        <tbody className="text-lg text-zinc-50 font-medium">
           {data.map((d: any, index: number) => (
             <tr
               key={d.id}
-              className={`text-sm ${
-                index % 2 === 0
-                  ? 'odd:bg-blue-400 odd:text-white'
-                  : 'even:bg-white even:text-blue-500'
-              } hover:bg-blue-200 border-t border-black`}
+              className={`text-sm 
+                ${index % 2 === 0 ? 'odd:bg-blue-400 odd:text-white' : 'even:bg-white even:text-blue-500'} 
+                hover:bg-blue-200 text-neutral-950`}
             >
               <td>{d.name}</td>
               <td>{d.description}</td>
@@ -43,6 +43,9 @@ export default function Home({data}) {
           ))}
         </tbody>
       </table>
+      <Link className='fixed bottom-0 w-full' href="/insert">
+        <button className='my-6 mx-8 float-right px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>Insert</button>
+      </Link>
     </div>
   )
 }
