@@ -8,13 +8,15 @@ import { AiFillDelete } from 'react-icons/ai'
 import { FaPencilAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import Modal from '../components/modal'
+import { useData } from '../context/DataContext'
 
-export default function Home({data}) {
+export default function Home({d}) {
 
-  const [items, setItems] = useState(data)
+  const [items, setItems] = useState(d)
   const [open, setopen] = useState(false)
   const [id, setid] = useState("")
   const router = useRouter()
+  const { data, setData } = useData()
   
   const refreshData = () => {
     router.replace(router.asPath);
@@ -44,9 +46,14 @@ export default function Home({data}) {
     console.log("open");
     console.log(id);
   }
+
+  function handleUpdate(d:any){
+    setData(d)
+    // console.log(;
+  }
   
   useEffect(()=>{
-    setItems(data)
+    setItems(d)
   }, [items])
 
 
@@ -67,22 +74,24 @@ export default function Home({data}) {
             </tr>
           </thead>
           <tbody className="text-lg text-zinc-50 font-medium">
-            {data.map((d: any, index: number) => (
+            {d.map((datas: any, index: number) => (
               <tr
-                key={d.id}
+                key={datas.id}
                 className={`text-sm 
                   ${index % 2 === 0 ? 'odd:bg-blue-400 odd:text-white' : 'even:bg-white even:text-blue-500'} 
                   hover:bg-blue-200 text-neutral-950`}
               >
-                <td className='text-center'>{d.name}</td>
-                <td className='text-center'>{d.description}</td>
-                <td className="text-center">{d.foundAt}</td>
-                <td className='text-center'>{formatDate(d.foundDate)}</td>
-                <td className='text-center'>{d.type}</td>
-                <td className='text-center'><button className="btn btn-sm btn-outline btn-info"><FaPencilAlt/></button></td>
-                <td className='text-center'><button onClick={()=>handleOpen(d.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button></td>
-                
-
+                <td className='text-center'>{datas.name}</td>
+                <td className='text-center'>{datas.description}</td>
+                <td className="text-center">{datas.foundAt}</td>
+                <td className='text-center'>{formatDate(datas.foundDate)}</td>
+                <td className='text-center'>{datas.type}</td>
+                <td className='text-center'>
+                  <Link href={"/update"}>
+                    <button onClick={()=>handleUpdate(datas)} className="btn btn-sm btn-outline btn-info"><FaPencilAlt/></button>
+                  </Link>
+                  </td>
+                <td className='text-center'><button onClick={()=>handleOpen(datas.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button></td>
               </tr>
             ))}
           </tbody>
@@ -119,9 +128,9 @@ function formatDate(dateString: string) {
 
 export async function getServerSideProps() {
   try {
-    const data = await handler()
+    const d = await handler()
     return {
-      props: {data}
+      props: {d}
     }
   } catch (error) {
     return {

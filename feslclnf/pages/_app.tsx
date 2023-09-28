@@ -1,11 +1,14 @@
 import '../styles/globals.css'
 import Navbar from '../components/navbar'
+import { DataProvider } from '../context/DataContext'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Navbar/>
-      <Component {...pageProps} />
+      <DataProvider>
+        <Component {...pageProps} />
+      </DataProvider>
     </>
   )
 }
