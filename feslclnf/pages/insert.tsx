@@ -1,5 +1,9 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Head from 'next/head';
+import { useRouter } from 'next/router'
+import Modal from '../components/modal';
+
+
 export default function Insert(){
 
   const [name, setname] = useState("")
@@ -7,15 +11,7 @@ export default function Insert(){
   const [foundAt, setfoundAt] = useState("")
   const [foundDate, setfoundDate] = useState("")
   const [desc, setdesc] = useState("")
-
-  const test = () => {
-    console.log("ehehe");
-    console.log(name);
-    console.log(type);
-    console.log(foundAt);
-    console.log(foundDate);
-    console.log(desc);
-  }
+  const router = useRouter()
 
   const insertItem = async () => {
     const resp = await fetch('/api/items/insert', {
@@ -30,13 +26,13 @@ export default function Insert(){
       headers: {
         'Content-Type': 'application/json',
       },
+    }).then((e)=>{
+      router.back()
     })
-    const data = await resp.json()
-    console.log(data);
-    
   }
 
   return(
+
     <div>
       <div className="max-w-lg mx-auto mt-2 p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-semibold mb-4">Insert Item</h1>
