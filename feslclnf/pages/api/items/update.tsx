@@ -3,11 +3,12 @@ const url = process.env.NEXT_PUBLIC_EXPRESS_API_URL
 export default async function handler(req, res) {
   try {
     const resp = await fetch(`${url}/items`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        id: req.body.id,
         name: req.body.name,
         type: req.body.type,
         foundAt: req.body.foundAt,
@@ -17,6 +18,7 @@ export default async function handler(req, res) {
     })
     res.status(201).json({name:"ok"})
   } catch (error) {
-    throw error;
+    throw error
   }
+  
 }
