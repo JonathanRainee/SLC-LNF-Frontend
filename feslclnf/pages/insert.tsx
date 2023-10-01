@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react'
 import Head from 'next/head';
 import { useRouter } from 'next/router'
 import Modal from '../components/modal';
+import handler from './api/items/upload'
 
 
 export default function Insert(){
@@ -11,7 +12,23 @@ export default function Insert(){
   const [foundAt, setfoundAt] = useState("")
   const [foundDate, setfoundDate] = useState("")
   const [desc, setdesc] = useState("")
+  const [ imgLink, setImgLink] = useState("-")
+  const [img, setImg] = useState<File|null>(null)
   const router = useRouter()
+
+  const onChangePic = e => {
+    setImg(e.target.files[0])
+  }
+
+  const uploadImg = async (e) => {
+    e.preventDefault();
+    if(!img) return
+    try {
+      const resp = await handler(img)
+      setImgLink(resp.link)
+    } catch (error) {
+    }
+  }
 
   const insertItem = async () => {
     const resp = await fetch('/api/items/insert', {
@@ -21,7 +38,8 @@ export default function Insert(){
         type: type,
         foundAt: foundAt,
         foundDate: foundDate,
-        description: desc
+        description: desc,
+        imageLink: imgLink
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -32,10 +50,8 @@ export default function Insert(){
   }
 
   return(
-
     <div>
       <div className="max-w-lg mx-auto mt-2 p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-semibold mb-4">Insert Item</h1>
         <form>
           <div className="space-y-4">
             <div>
@@ -58,8 +74,15 @@ export default function Insert(){
               <label htmlFor="description" className="block font-semibold">Description</label>
               <textarea onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
             </div>
+            <div>
+              <label htmlFor="image" className="block font-semibold">Image</label>
+              <div className='flex justify-between'>
+                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full max-w mr-4" />
+                <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">Upload</button>
+              </div>
+            </div>
           </div>
-          <button onClick={insertItem} type="submit" className="w-full bg-blue-500 text-white py-2 my-2 rounded-md hover:bg-blue-600 focus:outline-none">
+          <button onClick={insertItem} type="submit" className="w-full bg-blue-500 text-white py-2 my-2 mt-4 rounded-md hover:bg-blue-600 focus:outline-none">
             Insert Item
           </button>
         </form>

@@ -15,8 +15,6 @@ const Update = () => {
   const router = useRouter()
 
   const updateItem = async () => {
-    
-    
     const resp = await fetch('/api/items/update', {
       method: "PUT",
       body: JSON.stringify({
