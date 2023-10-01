@@ -3,7 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router'
 import Modal from '../components/modal';
 import handler from './api/items/upload'
-
+import { TailSpin } from 'react-loader-spinner';
+import {MdOutlineDoneOutline} from 'react-icons/md'
+import { AiOutlineUpload } from "react-icons/ai";
 
 export default function Insert(){
 
@@ -12,7 +14,8 @@ export default function Insert(){
   const [foundAt, setfoundAt] = useState("")
   const [foundDate, setfoundDate] = useState("")
   const [desc, setdesc] = useState("")
-  const [ imgLink, setImgLink] = useState("-")
+  const [ imgLink, setImgLink] = useState("")
+  const [ uploading, setuploading ] = useState(false) 
   const [img, setImg] = useState<File|null>(null)
   const router = useRouter()
 
@@ -23,10 +26,13 @@ export default function Insert(){
   const uploadImg = async (e) => {
     e.preventDefault();
     if(!img) return
+    setuploading(true)
     try {
       const resp = await handler(img)
       setImgLink(resp.link)
+      setuploading(false)
     } catch (error) {
+      setuploading(false)
     }
   }
 
@@ -75,10 +81,44 @@ export default function Insert(){
               <textarea onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
             </div>
             <div>
-              <label htmlFor="image" className="block font-semibold">Image</label>
+              <label htmlFor="image" className="block font-semibold mb-2">Image</label>
               <div className='flex justify-between'>
-                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full max-w mr-4" />
-                <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">Upload</button>
+                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full mr-4" />
+                <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">
+                
+                  <AiOutlineUpload/>
+                  {uploading ? (
+                    <TailSpin
+                      height="15"
+                      width="15"
+                      color="##1e71f7"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  ) : (
+                    imgLink && <MdOutlineDoneOutline/>
+                  )}
+                </button>
+                {/* <div>
+                  {uploading ? (
+                    <TailSpin
+                      height="20"
+                      width="20"
+                      color="##1e71f7"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  ) : (
+                    imgLink && <button className="btn btn-outline btn-info btn-sm" disabled><MdOutlineDoneOutline/></button>
+                  )}
+
+                </div> */}
               </div>
             </div>
           </div>
