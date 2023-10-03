@@ -1,6 +1,30 @@
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDebounce } from "use-debounce";
 
 export default function Navbar(){
+
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [searchName, setsearchName] = useState("")
+  const [searchType, setsearchType] = useState("")
+  const [searchRoom, setsearchRoom] = useState("")
+  const [queryName] = useDebounce(searchName, 500)
+
+  useEffect(()=>{
+    if(!queryName){
+      router.push("/")
+    }else{
+      router.push(
+        `?name=${queryName}&type=${searchType}&room=${searchRoom}`,
+        {
+          scroll:false
+        }
+      )
+    }
+  }, [queryName, searchType, searchRoom, router])
+
   return(
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -12,14 +36,14 @@ export default function Navbar(){
       <ul className="menu menu-horizontal px-1">
         <li>
           <div className="relative hover:bg-transparent">
-            <input type="text" placeholder="Search" className="input input-bordered input-sm w-full max-w-xs"/>
+            <input onChange={(e)=>setsearchName(e.target.value)} type="text" placeholder="Search" className="input input-bordered input-sm w-full max-w-xs"/>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3">
             </span>
           </div>
         </li>
         <li>
           <div className="relative  hover:bg-transparent">
-            <select className="input input-bordered input-sm w-full max-w-xs">
+            <select onChange={(e)=>setsearchType(e.target.value)}   className="input input-bordered input-sm w-full max-w-xs">
               <option value="filter1">Filter 1</option>
               <option value="filter2">Filter 2</option>
             </select>
@@ -28,9 +52,9 @@ export default function Navbar(){
         </li>
         <li>
           <div className="relative hover:bg-transparent">
-            <select className="input input-bordered input-sm w-full max-w-xs">
-              <option value="filter3">Filter 3</option>
-              <option value="filter4">Filter 4</option>
+            <select onChange={(e)=>setsearchRoom(e.target.value)} className="input input-bordered input-sm w-full max-w-xs">
+              <option value="3">3</option>
+              <option value="4">4</option>
             </select>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"></span>
           </div>

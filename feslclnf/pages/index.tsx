@@ -9,15 +9,24 @@ import { FaPencilAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import Modal from '../components/modal'
 import { useData } from '../context/DataContext'
+import { useSearchParams } from 'next/navigation'
+import Navbar from '../components/navbar'
 
 export default function Home({d}) {
 
+  
   const [items, setItems] = useState(d)
   const [open, setopen] = useState(false)
   const [id, setid] = useState("")
   const router = useRouter()
   const { data, setData } = useData()
+  const { name, type, room } = router.query;
+
+  const nameFromURL = Array.isArray(name) ? name[0] : name || '';
+  const typeFromURL = Array.isArray(type) ? type[0] : type || '';
+  const roomFromURL = Array.isArray(room) ? room[0] : room || '';
   
+
   const refreshData = () => {
     router.replace(router.asPath);
   };
@@ -59,8 +68,8 @@ export default function Home({d}) {
 
   return (
     <Fragment>
-
       <div className="overflow-x-auto m-4">
+        <Navbar/>
         <table className="table table-sm table-zebra ">
           <thead>
             <tr className="text-lg border-t border-black">
