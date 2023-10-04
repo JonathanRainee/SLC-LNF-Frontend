@@ -135,9 +135,10 @@ function formatDate(dateString: string) {
   return `${year}-${month}-${day}`;
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   try {
-    const d = await handler()
+    const { name, type, room } = context.query;
+    const d = await handler(name, type, room)
     return {
       props: {d}
     }
