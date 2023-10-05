@@ -13,7 +13,9 @@ export default function Navbar(){
   const [queryName] = useDebounce(searchName, 500)
 
   useEffect(()=>{
-    if(!queryName){
+    console.log(queryName, searchRoom, searchType);
+    
+    if(!queryName && !searchRoom && !searchType){
       router.push("/")
     }else{
       router.push(
@@ -44,6 +46,7 @@ export default function Navbar(){
         <li>
           <div className="relative  hover:bg-transparent">
             <select onChange={(e)=>setsearchType(e.target.value)}   className="input input-bordered input-sm w-full max-w-xs">
+              <option value="">Type</option>
               <option value="filter1">Filter 1</option>
               <option value="filter2">Filter 2</option>
             </select>
@@ -53,8 +56,9 @@ export default function Navbar(){
         <li>
           <div className="relative hover:bg-transparent">
             <select onChange={(e)=>setsearchRoom(e.target.value)} className="input input-bordered input-sm w-full max-w-xs">
-              <option value="3">3</option>
-              <option value="4">4</option>
+              <option value="">Room</option>
+              <option value="123">123</option>
+              <option value="623">623</option>
             </select>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"></span>
           </div>
