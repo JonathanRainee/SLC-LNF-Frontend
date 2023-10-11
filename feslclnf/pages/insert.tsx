@@ -102,23 +102,6 @@ export default function Insert(){
                     imgLink && <MdOutlineDoneOutline/>
                   )}
                 </button>
-                {/* <div>
-                  {uploading ? (
-                    <TailSpin
-                      height="20"
-                      width="20"
-                      color="##1e71f7"
-                      ariaLabel="tail-spin-loading"
-                      radius="1"
-                      wrapperStyle={{}}
-                      wrapperClass=""
-                      visible={true}
-                    />
-                  ) : (
-                    imgLink && <button className="btn btn-outline btn-info btn-sm" disabled><MdOutlineDoneOutline/></button>
-                  )}
-
-                </div> */}
               </div>
             </div>
           </div>

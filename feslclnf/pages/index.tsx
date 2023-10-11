@@ -109,7 +109,7 @@ export default function Home({d}) {
           <button className='my-6 mx-8 float-right px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>Insert</button>
         </Link>
       </div>
-      <Modal id={id} isOpen={open} onClose={()=>{setopen(false)}}>
+      <Modal isOpen={open} onClose={()=>{setopen(false)}}>
         <div className='pt-8 pb-8'>
           <h3 className='text-xl font-semibold text-red-500 mb-4 text-center'>Are you sure, you want to delete this item?</h3>
           <div className='flex justify-center'>

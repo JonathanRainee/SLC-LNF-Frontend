@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Modal = ({ id, isOpen, onClose, children }) => {
+const Modal = ({ isOpen, onClose, children }) => {
 
   const handleClose = (e) => {
     if(e.target.id === "wrapper") onClose()
