@@ -15,35 +15,10 @@ const Admin221 = () => {
   } 
 
   const login = async () => {
-    // try {
-    //   console.log(username, password);
-    //   const resp = await fetch('/api/adm/log', {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: password,
-    //     }),
-    //     headers:{
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-
-    //   if(resp.ok){
-    //     const data = await resp.json();
-    //     console.log(data);
-        
-    //   }else{
-    //     console.log("not ok zing");
-        
-    //   }
-    // } catch (error) {
-      
-    // }
-    
     try {
       console.log("kmqkk");
-      
-      const resp = await fetch('/api/adm/log', {
+  
+      const response = await fetch('/api/adm/log', {
         method: "POST",
         body: JSON.stringify({
           username: username,
@@ -51,20 +26,25 @@ const Admin221 = () => {
         }),
         headers: {
           'Content-Type': 'application/json',
-        },
+        }
       });
-      console.log("kmqk");
-      
-      if (resp.status == 200) {
-        const data = await resp.json();
-        console.log(data);
+  
+  
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log("Success:", data.message);
+      } else if (response.status === 401) {
+        const data = await response.json();
+        console.error("Authentication failed:", data.message);
       } else {
-        console.error('Request failed with status', resp.status);
+        console.error('Unexpected response status:', response.status);
       }
     } catch (error) {
+      console.log(error);
+      
       console.error('An error occurred:', error);
     }
-
+    
   }
 
   return (

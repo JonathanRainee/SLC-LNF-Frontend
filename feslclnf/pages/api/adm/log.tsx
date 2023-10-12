@@ -14,8 +14,16 @@ export default async function handler(req, res){
         password: req.body.password,
       })
     })
-    const data = await resp.json()
-    return data
+    if (resp.status === 200) {
+      const data = await resp.json();
+      res.status(200).json(data); 
+    } else if (resp.status === 401) {
+      const data = await resp.json();
+      res.status(401).json(data);
+    } else {
+      res.status(resp.status).json({ message: 'Unexpected response status' });
+    }
+    return resp.json()
   } catch (error) {
     throw error
   }
