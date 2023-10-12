@@ -8,7 +8,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { FaPencilAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import Modal from '../components/modal'
-import { useData } from '../context/DataContext'
+import { useData, useIsAdmin } from '../context/DataContext'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '../components/navbar'
 
@@ -20,12 +20,12 @@ export default function Home({d}) {
   const [id, setid] = useState("")
   const router = useRouter()
   const { data, setData } = useData()
+  const { isAdmin, setIsAdmin } = useIsAdmin()
   const { name, type, room } = router.query;
 
   const nameFromURL = Array.isArray(name) ? name[0] : name || '';
   const typeFromURL = Array.isArray(type) ? type[0] : type || '';
   const roomFromURL = Array.isArray(room) ? room[0] : room || '';
-  
 
   const refreshData = () => {
     router.replace(router.asPath);
@@ -78,8 +78,14 @@ export default function Home({d}) {
               <td className='text-center'>Found At</td>
               <td className='text-center'>Found Date</td>
               <td className='text-center'>Type</td>
-              <td className='text-center'>Update</td>
-              <td className='text-center'>Delete</td>
+              {
+                isAdmin ? (
+                  <>
+                    <td className='text-center'>Update</td>
+                    <td className='text-center'>Delete</td>
+                  </>
+                ) : null
+              }
             </tr>
           </thead>
           <tbody className="text-lg text-zinc-50 font-medium">
@@ -95,19 +101,31 @@ export default function Home({d}) {
                 <td className="text-center">{datas.foundAt}</td>
                 <td className='text-center'>{formatDate(datas.foundDate)}</td>
                 <td className='text-center'>{datas.type}</td>
-                <td className='text-center'>
-                  <Link href={"/update"}>
-                    <button onClick={()=>handleUpdate(datas)} className="btn btn-sm btn-outline btn-info"><FaPencilAlt/></button>
-                  </Link>
-                  </td>
-                <td className='text-center'><button onClick={()=>handleOpen(datas.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button></td>
+                {
+                  isAdmin ? (
+                    <>
+                      <td className='text-center'>
+                        <Link href={"/update"}>
+                          <button onClick={()=>handleUpdate(datas)} className="btn btn-sm btn-outline btn-info"><FaPencilAlt/></button>
+                        </Link>
+                        </td>
+                      <td className='text-center'><button onClick={()=>handleOpen(datas.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button></td>
+                    </>
+                  ) : null
+                }
               </tr>
             ))}
           </tbody>
         </table>
-        <Link className='fixed bottom-0 w-full' href="/insert">
-          <button className='my-6 mx-8 float-right px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>Insert</button>
-        </Link>
+        {
+          isAdmin ? (
+            <>
+              <Link className='fixed bottom-0 w-full' href="/insert">
+                <button className='my-6 mx-8 float-right px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>Insert</button>
+              </Link>
+            </>
+          ) : null
+        }
       </div>
       <Modal isOpen={open} onClose={()=>{setopen(false)}}>
         <div className='pt-8 pb-8'>
