@@ -13,8 +13,6 @@ export default function Navbar(){
   const [queryName] = useDebounce(searchName, 500)
 
   useEffect(()=>{
-    console.log(queryName, searchRoom, searchType);
-    
     if(!queryName && !searchRoom && !searchType){
       router.push("/")
     }else{

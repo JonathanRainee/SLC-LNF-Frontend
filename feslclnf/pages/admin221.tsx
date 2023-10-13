@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import Modal from '../components/modal'
 import { useRouter } from 'next/router'
+import { useIsAdmin } from '../context/DataContext'
 
 const Admin221 = () => {
 
@@ -9,6 +10,9 @@ const Admin221 = () => {
   const [open, setopen] = useState(true)
   const [username, setusername] = useState("")
   const [password, setpassword] = useState("")
+  const { isAdmin, setIsAdmin } = useIsAdmin()
+  
+  // localStorage.setItem('admState', JSON.stringify(isAdmin));
   
   function back(){
     router.replace('/')
@@ -16,8 +20,6 @@ const Admin221 = () => {
 
   const login = async () => {
     try {
-      console.log("kmqkk");
-  
       const response = await fetch('/api/adm/log', {
         method: "POST",
         body: JSON.stringify({
@@ -31,13 +33,15 @@ const Admin221 = () => {
   
   
       if (response.status === 200) {
+        setIsAdmin(true)
+        localStorage.setItem('admState', JSON.stringify(true));
         const data = await response.json();
-        console.log("Success:", data.message);
+        router.replace('/')
       } else if (response.status === 401) {
         const data = await response.json();
-        console.error("Authentication failed:", data.message);
+
       } else {
-        console.error('Unexpected response status:', response.status);
+      
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +50,7 @@ const Admin221 = () => {
     }
     
   }
+
 
   return (
     <Modal isOpen={open} onClose={()=>{setopen(false)}}>
