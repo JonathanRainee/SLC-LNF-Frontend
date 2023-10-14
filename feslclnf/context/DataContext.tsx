@@ -15,7 +15,7 @@ const IsAdminContext = createContext<IsAdmin | null>(null)
 
 export function DataProvider({ children }) {
   const [data, setData] = useState<Data | null>(null)
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(true)
 
   return (
     <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>

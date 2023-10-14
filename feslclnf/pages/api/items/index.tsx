@@ -16,7 +16,6 @@ export default async function handler(name: string, type: string, room: string) 
     
     const urlWithQuery = queryString ? `${url}/itemSearch?${queryString}` : `${url}/items`;
     
-    
     const resp = await fetch(urlWithQuery, {
       method: 'GET',
       headers: {
@@ -26,7 +25,6 @@ export default async function handler(name: string, type: string, room: string) 
     const data = await resp.json()
     return data
   } catch (error) {
-    console.error('Error:', error)
     throw error
   }
 }

@@ -12,8 +12,6 @@ const Admin221 = () => {
   const [password, setpassword] = useState("")
   const { isAdmin, setIsAdmin } = useIsAdmin()
   
-  // localStorage.setItem('admState', JSON.stringify(isAdmin));
-  
   function back(){
     router.replace('/')
   } 

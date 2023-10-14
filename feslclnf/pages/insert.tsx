@@ -6,6 +6,8 @@ import handler from './api/items/upload'
 import { TailSpin } from 'react-loader-spinner';
 import {MdOutlineDoneOutline} from 'react-icons/md'
 import { AiOutlineUpload } from "react-icons/ai";
+import * as XLSX from 'xlsx';
+import { table } from 'console';
 
 export default function Insert(){
 
@@ -17,7 +19,11 @@ export default function Insert(){
   const [ imgLink, setImgLink] = useState("")
   const [ uploading, setuploading ] = useState(false) 
   const [img, setImg] = useState<File|null>(null)
+  const [data, setdata] = useState([])
   const router = useRouter()
+
+  const [columnToExtract, setColumnToExtract] = useState('');
+  const [extractedData, setExtractedData] = useState([]);
 
   const onChangePic = e => {
     setImg(e.target.files[0])
@@ -33,6 +39,43 @@ export default function Insert(){
       setuploading(false)
     } catch (error) {
       setuploading(false)
+    }
+  }
+
+  const uploadWFile =async (e) => {
+    e.preventDefault();
+    data.forEach(async e => {
+      console.log(e.name, e.type, e.foundAt, e,foundDate, e.desc);
+      const resp = await fetch('/api/items/insert', {
+        method: "POST",
+        body: JSON.stringify({
+          name: e.name,
+          type: e.type,
+          foundAt: e.foundAt.toString(),
+          foundDate: e.foundDate,
+          description: e.desc,
+          imageLink: "-"
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    })
+    router.replace('/')
+  }
+
+  const handleFileUpload =  (e) => {
+    const reader = new FileReader()
+    reader.readAsBinaryString(e.target.files[0])
+    reader.onload = (e) => {
+      const data = e.target.result
+      const workbook = XLSX.read(data, {type: "binary"})
+      const sheetName = workbook.SheetNames[0]
+      const sheet = workbook.Sheets[sheetName]
+      const parsedData = XLSX.utils.sheet_to_json(sheet)
+      console.log(parsedData[0]);
+      
+      setdata(parsedData)
     }
   }
 
@@ -56,8 +99,8 @@ export default function Insert(){
   }
 
   return(
-    <div>
-      <div className="max-w-lg mx-auto mt-2 p-6 rounded-lg shadow-lg">
+    <div className='justify-center items-center h-screen'>
+      <div className="max-w-lg mx-auto pt-14 rounded-lg shadow-lg">
         <form>
           <div className="space-y-4">
             <div>
@@ -85,6 +128,30 @@ export default function Insert(){
               <div className='flex justify-between'>
                 <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full mr-4" />
                 <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">
+                
+                  <AiOutlineUpload/>
+                  {uploading ? (
+                    <TailSpin
+                      height="15"
+                      width="15"
+                      color="##1e71f7"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  ) : (
+                    imgLink && <MdOutlineDoneOutline/>
+                  )}
+                </button>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="image" className="block font-semibold mb-2">File</label>
+              <div className='flex justify-between'>
+                <input accept=".xlsx, .xls" type="file" className="file-input file-input-bordered file-input-sm w-full mr-4" onChange={handleFileUpload}/>
+                <button onClick={uploadWFile}  className="btn btn-outline btn-info btn-sm">
                 
                   <AiOutlineUpload/>
                   {uploading ? (

@@ -13,7 +13,8 @@ export default async function handler(req, res) {
         type: req.body.type,
         foundAt: req.body.foundAt,
         foundDate: req.body.foundDate,
-        description: req.body.description
+        description: req.body.description,
+        imageLink: req.body.imageLink
       })
     })
     res.status(201).json({name:"ok"})

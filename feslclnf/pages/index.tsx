@@ -11,10 +11,10 @@ import Modal from '../components/modal'
 import { useData, useIsAdmin } from '../context/DataContext'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '../components/navbar'
+import PaginationControls from '../components/PaginationController'
 
 export default function Home({d}) {
 
-  
   const [items, setItems] = useState(d)
   const [open, setopen] = useState(false)
   const [id, setid] = useState("")
@@ -24,8 +24,6 @@ export default function Home({d}) {
   const { name, type, room } = router.query;
 
   const newValue = isAdmin;
-  // localStorage.setItem('admState', JSON.stringify(newValue));
-
   const nameFromURL = Array.isArray(name) ? name[0] : name || '';
   const typeFromURL = Array.isArray(type) ? type[0] : type || '';
   const roomFromURL = Array.isArray(room) ? room[0] : room || '';
@@ -66,9 +64,8 @@ export default function Home({d}) {
 
   function handleUpdate(d:any){
     setData(d)
-    // console.log(;
   }
-  
+
   useEffect(()=>{
     setItems(d)
   }, [items])
@@ -76,12 +73,11 @@ export default function Home({d}) {
   useEffect(() => {
     const storedValue = localStorage.getItem('admState');
     if (storedValue) {
-      console.log(storedValue);
-      
       const parsedValue = JSON.parse(storedValue);
       setIsAdmin(parsedValue);
     }
   }, []);
+  
 
 
   return (
@@ -140,9 +136,9 @@ export default function Home({d}) {
             <>
               <div className='flex flex-row justify-end fixed bottom-0 right-0'>
                 <Link  href="/insert">
-                  <button className='my-6 mx-2 px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>Insert</button>
+                  <button className='my-6 mx-2 px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>Insert</button>
                 </Link>
-                <button onClick={logOut} className='my-6 mx-2 px-5 py-2 bg-red-500 text-white text-sm font-bold tracking-wide rounded-full focus:outline-none'>log out</button>
+                <button onClick={logOut} className='my-6 mx-2 px-5 py-2 bg-red-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>log out</button>
               </div>
             </>
           ) : null

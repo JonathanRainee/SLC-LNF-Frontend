@@ -2,6 +2,10 @@ import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import handlerRoom from "../pages/api/items/room";
+import handlerType from "../pages/api/items/type";
+import { v4 as uuidv4 } from 'uuid';
+import React from "react";
 
 export default function Navbar(){
 
@@ -11,6 +15,32 @@ export default function Navbar(){
   const [searchType, setsearchType] = useState("")
   const [searchRoom, setsearchRoom] = useState("")
   const [queryName] = useDebounce(searchName, 500)
+  const [ rooms, setRooms ] = useState([])
+  const [ types, setTypes ] = useState([])
+
+  useEffect(()=>{
+    const roomData = async () => {
+      try {
+        const data = await handlerRoom()
+        setRooms(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    roomData()
+  }, [])
+  
+  useEffect(()=>{
+    const typeData = async () => {
+      try {
+        const data = await handlerType()
+        setTypes(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    typeData()
+  }, [])
 
   useEffect(()=>{
     if(!queryName && !searchRoom && !searchType){
@@ -45,8 +75,16 @@ export default function Navbar(){
           <div className="relative  hover:bg-transparent">
             <select onChange={(e)=>setsearchType(e.target.value)}   className="input input-bordered input-sm w-full max-w-xs">
               <option value="">Type</option>
-              <option value="filter1">Filter 1</option>
-              <option value="filter2">Filter 2</option>
+              {
+                types.map((e)=>{
+                  var id = uuidv4()
+                  return(
+                    <React.Fragment key={id}>
+                      <option value={e.type}>{e.type}</option>
+                    </React.Fragment>
+                  )
+                })
+              }
             </select>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"></span>
           </div>
@@ -55,8 +93,16 @@ export default function Navbar(){
           <div className="relative hover:bg-transparent">
             <select onChange={(e)=>setsearchRoom(e.target.value)} className="input input-bordered input-sm w-full max-w-xs">
               <option value="">Room</option>
-              <option value="123">123</option>
-              <option value="623">623</option>
+              {
+                rooms.map((e)=>{
+                  var id = uuidv4()
+                  return(
+                    <React.Fragment key={id}>
+                      <option value={e.foundAt}>{e.foundAt}</option>
+                    </React.Fragment>
+                  )
+                })
+              }
             </select>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none"></span>
           </div>
