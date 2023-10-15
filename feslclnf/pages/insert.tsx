@@ -18,8 +18,10 @@ export default function Insert(){
   const [desc, setdesc] = useState("")
   const [ imgLink, setImgLink] = useState("")
   const [ uploading, setuploading ] = useState(false) 
+  const [ uploadingFile, setuploadingFile ] = useState(false) 
   const [img, setImg] = useState<File|null>(null)
   const [data, setdata] = useState([])
+  const [ doneUploading, setDoneUploading ] = useState(false)
   const router = useRouter()
 
   const [columnToExtract, setColumnToExtract] = useState('');
@@ -44,6 +46,7 @@ export default function Insert(){
 
   const uploadWFile =async (e) => {
     e.preventDefault();
+    setuploadingFile(true)
     data.forEach(async e => {
       console.log(e.name, e.type, e.foundAt, e,foundDate, e.desc);
       const resp = await fetch('/api/items/insert', {
@@ -61,6 +64,8 @@ export default function Insert(){
         },
       })
     })
+    setuploadingFile(false)
+    setDoneUploading(true)
     router.replace('/')
   }
 
@@ -74,7 +79,6 @@ export default function Insert(){
       const sheet = workbook.Sheets[sheetName]
       const parsedData = XLSX.utils.sheet_to_json(sheet)
       console.log(parsedData[0]);
-      
       setdata(parsedData)
     }
   }
@@ -154,7 +158,7 @@ export default function Insert(){
                 <button onClick={uploadWFile}  className="btn btn-outline btn-info btn-sm">
                 
                   <AiOutlineUpload/>
-                  {uploading ? (
+                  {uploadingFile ? (
                     <TailSpin
                       height="15"
                       width="15"
@@ -166,7 +170,7 @@ export default function Insert(){
                       visible={true}
                     />
                   ) : (
-                    imgLink && <MdOutlineDoneOutline/>
+                    doneUploading && <MdOutlineDoneOutline/>
                   )}
                 </button>
               </div>

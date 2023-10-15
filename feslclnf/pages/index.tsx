@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import { useState, useEffect, Fragment } from 'react'
 import handler from './api/items'
 import Link from 'next/link'
-import { AiFillDelete } from 'react-icons/ai'
+import { AiFillDelete, AiOutlineInfoCircle } from 'react-icons/ai'
 import { FaPencilAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import Modal from '../components/modal'
@@ -58,12 +58,15 @@ export default function Home({d}) {
   function handleOpen(id:any){
     setopen(true)
     setid(id)
-    console.log("open");
-    console.log(id);
   }
 
   function handleUpdate(d:any){
     setData(d)
+  }
+  
+  async function handleDetail(d:any){
+    await setData(d)
+    router.push('/detail')
   }
 
   useEffect(()=>{
@@ -77,8 +80,6 @@ export default function Home({d}) {
       setIsAdmin(parsedValue);
     }
   }, []);
-  
-
 
   return (
     <Fragment>
@@ -100,12 +101,13 @@ export default function Home({d}) {
                   </>
                 ) : null
               }
+              <td className='text-center'>Detail</td>
             </tr>
           </thead>
           <tbody className="text-lg text-zinc-50 font-medium">
             {d.map((datas: any, index: number) => (
-              <tr
-                key={datas.id}
+      
+              <tr key={datas.id} id='row'
                 className={`text-sm 
                   ${index % 2 === 0 ? 'odd:bg-blue-400 odd:text-white' : 'even:bg-white even:text-blue-500'} 
                   hover:bg-blue-200 text-neutral-950`}
@@ -122,11 +124,18 @@ export default function Home({d}) {
                         <Link href={"/update"}>
                           <button onClick={()=>handleUpdate(datas)} className="btn btn-sm btn-outline btn-info"><FaPencilAlt/></button>
                         </Link>
-                        </td>
-                      <td className='text-center'><button onClick={()=>handleOpen(datas.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button></td>
+                      </td>
+                      <td className='text-center'>
+                        <button onClick={()=>handleOpen(datas.id)} className="btn btn-sm btn-outline btn-error"><AiFillDelete/></button>
+                      </td>
                     </>
                   ) : null
                 }
+                <td className='text-center'>
+                  <Link href={"/detail"}>
+                    <button onClick={()=>handleDetail(datas)} className="btn btn-sm btn-outline btn-info"><AiOutlineInfoCircle/></button>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
