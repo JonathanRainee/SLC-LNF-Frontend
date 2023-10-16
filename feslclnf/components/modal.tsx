@@ -8,9 +8,9 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   if(!isOpen) return null
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center' id="wrapper" onClick={handleClose}>
+    <div className='fixed inset-0 bg-blck bg-opacity-25 backdrop-blur-sm flex justify-center items-center' id="wrapper" onClick={handleClose}>
       <div className='w-[600px] flex flex-col'>
-        <div className='bg-blue-200 p-2 rounded'>
+        <div className='bg-main-blue p-2 rounded'>
           {children}
         </div>
       </div>

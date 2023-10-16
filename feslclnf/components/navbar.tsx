@@ -5,7 +5,7 @@ import { useDebounce } from "use-debounce";
 import handlerRoom from "../pages/api/items/room";
 import handlerType from "../pages/api/items/type";
 import { v4 as uuidv4 } from 'uuid';
-import React from "react";
+import React from "react"
 
 export default function Navbar(){
 
@@ -56,9 +56,9 @@ export default function Navbar(){
   }, [queryName, searchType, searchRoom, router])
 
   return(
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-main-blue">
       <div className="flex-1">
-        <Link className="p-4 normal-case text-xl" href="/">
+        <Link className="p-2 normal-case text-xl text-white" href="/">
           SLC L&F
         </Link>
       </div>
@@ -66,14 +66,14 @@ export default function Navbar(){
       <ul className="menu menu-horizontal px-1">
         <li>
           <div className="relative hover:bg-transparent">
-            <input onChange={(e)=>setsearchName(e.target.value)} type="text" placeholder="Search" className="input input-bordered input-sm w-full max-w-xs"/>
+            <input onChange={(e)=>setsearchName(e.target.value)} type="text" placeholder="Search" className="bg-white input input-bordered input-sm w-full max-w-xs text-blck placeholder-blck border-midnight"/>
             <span className="absolute inset-y-0 right-0 flex items-center pr-3">
             </span>
           </div>
         </li>
         <li>
           <div className="relative  hover:bg-transparent">
-            <select onChange={(e)=>setsearchType(e.target.value)}   className="input input-bordered input-sm w-full max-w-xs">
+            <select onChange={(e)=>setsearchType(e.target.value)}   className="bg-white input input-bordered input-sm w-full max-w-xs text-blck border-midnight">
               <option value="">Type</option>
               {
                 types.map((e)=>{
@@ -91,7 +91,7 @@ export default function Navbar(){
         </li>
         <li>
           <div className="relative hover:bg-transparent">
-            <select onChange={(e)=>setsearchRoom(e.target.value)} className="input input-bordered input-sm w-full max-w-xs">
+            <select onChange={(e)=>setsearchRoom(e.target.value)} className="bg-white input input-bordered input-sm w-full max-w-xs text-blck border-midnight">
               <option value="">Room</option>
               {
                 rooms.map((e)=>{

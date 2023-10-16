@@ -176,7 +176,7 @@ export default function Insert(){
               </div>
             </div>
           </div>
-          <button onClick={insertItem} type="submit" className="w-full bg-blue-500 text-white py-2 my-2 mt-4 rounded-md hover:bg-blue-600 focus:outline-none">
+          <button onClick={insertItem} type="submit" className="w-full bg-blue-500 text-blck py-2 my-2 mt-4 rounded-md hover:bg-blue-600 focus:outline-none bg-s-blue">
             Insert Item
           </button>
         </form>

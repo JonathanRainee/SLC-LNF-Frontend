@@ -83,34 +83,32 @@ export default function Home({d}) {
 
   return (
     <Fragment>
-      <div className="overflow-x-auto m-4">
         <Navbar/>
+      <div className="overflow-x-auto mt-2">
         <table className="table table-sm table-zebra ">
-          <thead>
-            <tr className="text-lg border-t border-black">
-              <td className='text-center'>Name</td>
-              <td className='text-center'>Description</td>
-              <td className='text-center'>Found At</td>
-              <td className='text-center'>Found Date</td>
-              <td className='text-center'>Type</td>
+          <thead className='px-2'>
+            <tr className="text-lg border-t border-black pb-2">
+              <td className='text-center text-white'>Name</td>
+              <td className='text-center text-white'>Description</td>
+              <td className='text-center text-white'>Found At</td>
+              <td className='text-center text-white'>Found Date</td>
+              <td className='text-center text-white'>Type</td>
               {
                 isAdmin ? (
                   <>
-                    <td className='text-center'>Update</td>
-                    <td className='text-center'>Delete</td>
+                    <td className='text-center text-white'>Update</td>
+                    <td className='text-center text-white'>Delete</td>
                   </>
                 ) : null
               }
-              <td className='text-center'>Detail</td>
+              <td className='text-center text-white'>Detail</td>
             </tr>
           </thead>
           <tbody className="text-lg text-zinc-50 font-medium">
             {d.map((datas: any, index: number) => (
       
               <tr key={datas.id} id='row'
-                className={`text-sm 
-                  ${index % 2 === 0 ? 'odd:bg-blue-400 odd:text-white' : 'even:bg-white even:text-blue-500'} 
-                  hover:bg-blue-200 text-neutral-950`}
+                className={`${index % 2 === 0 ? 'odd:bg-whi odd:text-white' : 'even:bg-white even:text-s-blue'} `}
               >
                 <td className='text-center'>{datas.name}</td>
                 <td className='text-center'>{datas.description}</td>
@@ -143,11 +141,11 @@ export default function Home({d}) {
         {
           isAdmin ? (
             <>
-              <div className='flex flex-row justify-end fixed bottom-0 right-0'>
+              <div className='flex flex-row justify-end fixed bottom-0 right-0 mr-2'>
                 <Link  href="/insert">
-                  <button className='my-6 mx-2 px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>Insert</button>
+                  <button className='bg-main-blue my-6 mx-2 px-5 py-2 bg-blue-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>Insert</button>
                 </Link>
-                <button onClick={logOut} className='my-6 mx-2 px-5 py-2 bg-red-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>log out</button>
+                <button onClick={logOut} className='my-6 mx-2 bg-m-red px-5 py-2 bg-red-500 text-white text-sm font-bold tracking-wide rounded focus:outline-none'>log out</button>
               </div>
             </>
           ) : null
@@ -155,7 +153,7 @@ export default function Home({d}) {
       </div>
       <Modal isOpen={open} onClose={()=>{setopen(false)}}>
         <div className='pt-8 pb-8'>
-          <h3 className='text-xl font-semibold text-red-500 mb-4 text-center'>Are you sure, you want to delete this item?</h3>
+          <h3 className='text-2xl font-semibold text-white mb-4 text-center'>Are you sure, you want to delete this item?</h3>
           <div className='flex justify-center'>
             <div className='pt-4'>
               <button className='btn btn-error mr-4 text-white' onClick={()=>deleteItem(id)}>DELETE</button>
