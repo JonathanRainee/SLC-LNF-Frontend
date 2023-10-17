@@ -83,32 +83,33 @@ export default function Home({d}) {
 
   return (
     <Fragment>
-        <Navbar/>
+      <Navbar/>
       <div className="overflow-x-auto mt-2">
-        <table className="table table-sm table-zebra ">
+        <table className="table table-sm">
           <thead className='px-2'>
-            <tr className="text-lg border-t border-black pb-2">
-              <td className='text-center text-white'>Name</td>
-              <td className='text-center text-white'>Description</td>
-              <td className='text-center text-white'>Found At</td>
-              <td className='text-center text-white'>Found Date</td>
-              <td className='text-center text-white'>Type</td>
+            <tr className="text-lg pb-2">
+              <td className='text-center text-blck'>Name</td>
+              <td className='text-center text-blck'>Description</td>
+              <td className='text-center text-blck'>Found At</td>
+              <td className='text-center text-blck'>Found Date</td>
+              <td className='text-center text-blck'>Type</td>
               {
                 isAdmin ? (
                   <>
-                    <td className='text-center text-white'>Update</td>
-                    <td className='text-center text-white'>Delete</td>
+                    <td className='text-center text-blck'>Update</td>
+                    <td className='text-center text-blck'>Delete</td>
                   </>
                 ) : null
               }
-              <td className='text-center text-white'>Detail</td>
+              <td className='text-center text-blck'>Detail</td>
             </tr>
           </thead>
           <tbody className="text-lg text-zinc-50 font-medium">
             {d.map((datas: any, index: number) => (
       
               <tr key={datas.id} id='row'
-                className={`${index % 2 === 0 ? 'odd:bg-whi odd:text-white' : 'even:bg-white even:text-s-blue'} `}
+                className={` border-none ${index % 2 === 0 ? 'odd:bg-col-1 odd:text-blck' : 'even:bg-col-2 even:text-blck'}`}
+                // className="bg-col-2"
               >
                 <td className='text-center'>{datas.name}</td>
                 <td className='text-center'>{datas.description}</td>
@@ -156,8 +157,8 @@ export default function Home({d}) {
           <h3 className='text-2xl font-semibold text-white mb-4 text-center'>Are you sure, you want to delete this item?</h3>
           <div className='flex justify-center'>
             <div className='pt-4'>
-              <button className='btn btn-error mr-4 text-white' onClick={()=>deleteItem(id)}>DELETE</button>
-              <button className='btn btn-info ml-4 text-white' onClick={()=>{setopen(false)}}>CANCEL</button>
+              <button className='btn btn-error mr-4 text-white bg-s-red' onClick={()=>deleteItem(id)}>DELETE</button>
+              <button className='btn btn-info ml-4 text-white bg-t-blue' onClick={()=>{setopen(false)}}>CANCEL</button>
             </div>
           </div>
         </div>

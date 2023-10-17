@@ -10,7 +10,7 @@ const Modal = ({ isOpen, onClose, children }) => {
   return (
     <div className='fixed inset-0 bg-blck bg-opacity-25 backdrop-blur-sm flex justify-center items-center' id="wrapper" onClick={handleClose}>
       <div className='w-[600px] flex flex-col'>
-        <div className='bg-main-blue p-2 rounded'>
+        <div className='bg-col-2 p-2 rounded-md'>
           {children}
         </div>
       </div>

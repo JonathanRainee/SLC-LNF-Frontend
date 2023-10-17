@@ -6,3 +6,9 @@
   height: 40px; 
 }
 
+html, body {
+  background-color: #EDF1F6;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

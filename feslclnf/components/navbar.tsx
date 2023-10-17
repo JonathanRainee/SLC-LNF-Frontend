@@ -66,9 +66,10 @@ export default function Navbar(){
       <ul className="menu menu-horizontal px-1">
         <li>
           <div className="relative hover:bg-transparent">
-            <input onChange={(e)=>setsearchName(e.target.value)} type="text" placeholder="Search" className="bg-white input input-bordered input-sm w-full max-w-xs text-blck placeholder-blck border-midnight"/>
-            <span className="absolute inset-y-0 right-0 flex items-center pr-3">
-            </span>
+            <input onChange={(e) => setsearchName(e.target.value)} type="text" placeholder="Search"
+              className="bg-white input input-bordered input-sm w-full text-blck placeholder-blck border-midnight"
+            />
+            <span className="absolute inset-y-0 right-0 flex items-center pr-3"></span>
           </div>
         </li>
         <li>

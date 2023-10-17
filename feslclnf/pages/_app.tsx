@@ -8,9 +8,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {/* <Navbar/> */}
-      <DataProvider>
-        <Component {...pageProps} />
-      </DataProvider>
+      <div>
+        
+        <DataProvider>
+          <Component {...pageProps} />
+        </DataProvider>
+
+      </div>
     </>
   )
 }
