@@ -109,28 +109,28 @@ export default function Insert(){
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block font-semibold text-blck">Name</label>
-              <input onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <input onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-col-1 text-blck" required/>
             </div>
             <div>
               <label htmlFor="type" className="block font-semibold text-blck">Type</label>
-              <input onChange={(e)=>settype(e.target.value)} type="text" id="type" name="type" placeholder="Enter item type" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <input onChange={(e)=>settype(e.target.value)} type="text" id="type" name="type" placeholder="Enter item type" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 text-blck" required/>
             </div>
             <div>
               <label htmlFor="foundAt" className="block font-semibold text-blck">Found At</label>
-              <input onChange={(e)=>setfoundAt(e.target.value)} type="text" id="foundAt" name="foundAt" placeholder="Enter found room" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <input onChange={(e)=>setfoundAt(e.target.value)} type="text" id="foundAt" name="foundAt" placeholder="Enter found room" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 text-blck" required/>
             </div>
             <div>
               <label htmlFor="foundDate" className="block font-semibold text-blck">Found Date</label>
-              <input onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <input onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 " required/>
             </div>
             <div>
               <label htmlFor="description" className="block font-semibold text-blck">Description</label>
-              <textarea onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+              <textarea onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 text-blck" required></textarea>
             </div>
             <div>
               <label htmlFor="image" className="block font-semibold text-blck mb-2">Image</label>
               <div className='flex justify-between'>
-                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full mr-4 bg-white" />
+                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full mr-4 bg-white border-s-blue" />
                 <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">
                 
                   <AiOutlineUpload/>
@@ -154,7 +154,7 @@ export default function Insert(){
             <div>
               <label htmlFor="image" className="block font-semibold text-blck mb-2">File</label>
               <div className='flex justify-between'>
-                <input accept=".xlsx, .xls" type="file" className="file-input file-input-bordered file-input-sm w-full mr-4 bg-white" onChange={handleFileUpload}/>
+                <input accept=".xlsx, .xls" type="file" className="file-input file-input-bordered file-input-sm w-full mr-4 bg-white border-s-blue" onChange={handleFileUpload}/>
                 <button onClick={uploadWFile}  className="btn btn-outline btn-info btn-sm ">
                 
                   <AiOutlineUpload/>
