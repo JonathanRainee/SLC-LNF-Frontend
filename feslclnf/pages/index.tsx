@@ -12,6 +12,7 @@ import { useData, useIsAdmin } from '../context/DataContext'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '../components/navbar'
 import PaginationControls from '../components/PaginationController'
+import { url } from 'node:inspector'
 
 export default function Home({d}) {
 
@@ -153,12 +154,14 @@ export default function Home({d}) {
         }
       </div>
       <Modal isOpen={open} onClose={()=>{setopen(false)}}>
-        <div className='pt-8 pb-8'>
-          <h3 className='text-2xl font-semibold text-white mb-4 text-center'>Are you sure, you want to delete this item?</h3>
+        <div className='pt-4 pb-8 flex flex-col justify-center items-center'>
+          <img src="/warning.png" alt="Image" />
+          <h3 className='text-4xl font-semibold pt-4 text-blck mb-4 text-center'>Are you sure?</h3>
+          <p className=' text-blck mb-4 text-center pt-2'>You will not be able to recover the item</p>
           <div className='flex justify-center'>
             <div className='pt-4'>
-              <button className='btn btn-error mr-4 text-white bg-s-red' onClick={()=>deleteItem(id)}>DELETE</button>
-              <button className='btn btn-info ml-4 text-white bg-t-blue' onClick={()=>{setopen(false)}}>CANCEL</button>
+              <button className='btn btn-info mr-4 text-white bg-t-blue' onClick={()=>{setopen(false)}}>CANCEL</button>
+              <button className='btn btn-error ml-4 text-white bg-s-red' onClick={()=>deleteItem(id)}>DELETE</button>
             </div>
           </div>
         </div>

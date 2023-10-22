@@ -29,28 +29,27 @@ export default function Detail(){
 
   return(
     <section className="text-gray-700 body-font overflow-hidden">
-  <div className="container px-5 py-24 mx-auto">
-    <div className="lg:w-4/5 mx-auto flex flex-wrap">
-      <img alt="image" className="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200" src={imgLink}>
-        </img>
-      <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-        <div className='border-b-2'>
-          <h1 className="text-blck text-3xl title-font font-medium mb-1">{name}</h1>
-        </div>
-        <div className="flex mb-4 flex-col mt-2">
-          <span className="flex items-center">
-            <span className="text-blck">Found at: {foundAt}</span>
-          </span>
-          <span className="flex items-center">
-            <span className="text-blck">Found date: {dayName}, {formattedDate}</span>
-          </span>
-        </div>
-        <p className="leading-relaxed text-blck">{desc}</p>
-        <div className="flex mt-6 items-center pb-5  border-gray-200 mb-5">
+      <div className="container pt-18 py-24 mx-auto h-screen flex flex-col justify-center items-center">
+        <div className="lg:w-4/5  mx-auto flex flex-wrap">
+          <img alt="image" className="lg:w-1/3 w-full object-cover object-center rounded border border-gray-200 drop-shadow-xl" src={imgLink}></img>
+          <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+            <div className='border-b-2'>
+              <h1 className="text-blck text-3xl title-font font-medium mb-1">{name}</h1>
+            </div>
+            <div className="flex mb-4 flex-col mt-2">
+              <span className="flex items-center">
+                <span className="text-blck">Found at: {foundAt}</span>
+              </span>
+              <span className="flex items-center">
+                <span className="text-blck">Found date: {dayName}, {formattedDate}</span>
+              </span>
+            </div>
+            <p className="leading-relaxed text-blck">{desc}</p>
+            <div className="flex mt-6 items-center pb-5  border-gray-200 mb-5">
+            </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
   )
 }

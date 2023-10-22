@@ -73,30 +73,30 @@ const Update = () => {
         <form>
           <div className="space-y-4">
             <div>
-              <label htmlFor="name" className="block font-semibold">Name</label>
-              <input value={name} onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <label htmlFor="name" className="text-blck block font-semibold">Name</label>
+              <input value={name} onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="text-blck border-s-blue bg-white my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
             </div>
             <div>
-              <label htmlFor="type" className="block font-semibold">Type</label>
-              <input value={type} onChange={(e)=>settype(e.target.value)} type="text" id="type" name="type" placeholder="Enter item type" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <label htmlFor="type" className="text-blck block font-semibold">Type</label>
+              <input value={type} onChange={(e)=>settype(e.target.value)} type="text" id="type" name="type" placeholder="Enter item type" className="text-blck border-s-blue bg-white my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
             </div>
             <div>
-              <label htmlFor="foundAt" className="block font-semibold">Found At</label>
-              <input value={foundAt} onChange={(e)=>setfoundAt(e.target.value)} type="text" id="foundAt" name="foundAt" placeholder="Enter found room" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <label htmlFor="foundAt" className="text-blck block font-semibold">Found At</label>
+              <input value={foundAt} onChange={(e)=>setfoundAt(e.target.value)} type="text" id="foundAt" name="foundAt" placeholder="Enter found room" className="text-blck border-s-blue bg-white my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
             </div>
             <div>
-              <label htmlFor="foundDate" className="block font-semibold">Found Date</label>
-              <input value={formattedDate} onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <label htmlFor="foundDate" className="text-blck block font-semibold">Found Date</label>
+              <input value={formattedDate} onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="my-1 w-full px-3text-blck border-s-blue bg-white  py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
             </div>
             <div>
-              <label htmlFor="description" className="block font-semibold">Description</label>
-              <textarea value={desc} onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+              <label htmlFor="description" className="text-blck block font-semibold">Description</label>
+              <textarea value={desc} onChange={(e)=>setdesc(e.target.value)} id="description" name="description" placeholder="Enter item description" className="text-blck border-s-blue bg-white my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
             </div>
             <div>
-              <label htmlFor="image" className="block font-semibold mb-2">Image</label>
+              <label htmlFor="image" className="text-blck block font-semibold mb-2">Image</label>
               <div className='flex justify-between'>
-                <input onChange={onChangePic} type="file" className="file-input file-input-bordered file-input-sm w-full mr-4" />
-                <button onClick={uploadImg} className="btn btn-outline btn-info btn-sm">
+                <input onChange={onChangePic} type="file" className="text-blck border-s-blue bg-white file-input file-input-bordered file-input-sm w-full mr-4" />
+                <button onClick={uploadImg} className="btn btext-blck border-s-blue bg-white tn-outline btn-info btn-sm">
                 
                   <AiOutlineUpload/>
                   {uploading ? (
@@ -117,7 +117,7 @@ const Update = () => {
               </div>
             </div>
           </div>
-          <button onClick={updateItem} type="submit" className="w-full bg-blue-500 text-white py-2 my-2 rounded-md hover:bg-blue-600 focus:outline-none">
+          <button onClick={updateItem} type="submit" className="w-full btn btn-outline btn-info  text-blck py-2 my-2 rounded-md hover:bg-t-blue focus:outline-none bg-s-blue">
             Update Item
           </button>
         </form>
