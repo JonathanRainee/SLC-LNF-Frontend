@@ -53,18 +53,18 @@ const Admin221 = () => {
   return (
     <Modal isOpen={open} onClose={()=>{setopen(false)}}>
       <form action="">
-        <div className='pt-4  pb-4 flex justify-center flex-col items-center'>
+        <div className='pt-12 pb-6 flex justify-center flex-col items-center'>
           {/* <h3 className='text-xl font-semibold text-black mb-4 text-center'>Input admin credential</h3> */}
           <div className='flex justify-center flex-col'>
-            <input onChange={(e)=>setusername(e.target.value)} type="text" id="name" name="name" placeholder="Username" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
-            <input onChange={(e)=>setpassword(e.target.value)} type="text" id="name" name="name" placeholder="Password" className="my-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" />
+            <input onChange={(e)=>setusername(e.target.value)} type="text" id="name" name="name" placeholder="Username" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-col- focus:border-main-blue text-blck" />
+            <input onChange={(e)=>setpassword(e.target.value)} type="password" id="name" name="name" placeholder="Password" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-col- focus:border-main-blue text-blck" />
           </div>
         </div>
       </form>
-          <div className='flex justify-center flex-row items-center'>
-              <button className='btn btn-info mr-4 text-white' onClick={login}>Log</button>
-              <button className='btn btn-error  ml-4 text-white' onClick={back}>CANCEL</button>
-            </div>
+      <div className='flex justify-center flex-row items-center pb-4'>
+        <button className='btn btn-info mr-4 text-white bg-t-blue' onClick={login}>Log</button>
+        <button className='btn btn-error ml-4 text-white bg-s-red' onClick={back}>CANCEL</button>
+      </div>
       </Modal>
   )
 }
