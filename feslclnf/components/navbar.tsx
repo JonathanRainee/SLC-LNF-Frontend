@@ -75,7 +75,7 @@ export default function Navbar(){
         <li>
           <div className="relative  hover:bg-transparent">
             <select onChange={(e)=>setsearchType(e.target.value)}   className="bg-white input input-bordered input-sm w-full max-w-xs text-blck border-midnight">
-              <option value="">Type</option>
+              <option value="">{searchType === "" ? "Type" : searchType}</option>
               {
                 types.map((e)=>{
                   var id = uuidv4()
@@ -93,7 +93,7 @@ export default function Navbar(){
         <li>
           <div className="relative hover:bg-transparent">
             <select onChange={(e)=>setsearchRoom(e.target.value)} className="bg-white input input-bordered input-sm w-full max-w-xs text-blck border-midnight">
-              <option value="">Room</option>
+              <option value="">{searchRoom === "" ? "Room" : searchRoom}</option>
               {
                 rooms.map((e)=>{
                   var id = uuidv4()

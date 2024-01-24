@@ -2,7 +2,6 @@ const url = process.env.NEXT_PUBLIC_EXPRESS_API_URL
 
 export default async function handler(req, res){
   try {
-    console.log("hehe");
     
     const resp = await fetch(`${url}/login`, {
       method: "POST",

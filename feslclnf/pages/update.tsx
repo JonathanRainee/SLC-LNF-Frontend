@@ -21,7 +21,6 @@ const Update = () => {
   const [ uploading, setuploading ] = useState(false) 
   const [img, setImg] = useState<File|null>(null)
   const router = useRouter()
-  console.log(foundDate);
 
   const date = new Date(foundDate);
   const year = date.getFullYear();
@@ -59,7 +58,6 @@ const Update = () => {
     setuploading(true)
     try {
       const resp = await handler(img)
-      console.log(resp);
       setImgLink(resp.link)
       setuploading(false)
     } catch (error) {
@@ -68,8 +66,8 @@ const Update = () => {
   }
 
   return(
-    <div>
-      <div className="max-w-lg mx-auto mt-2 p-6 rounded-lg shadow-lg">
+    <div  className='justify-center items-center h-screen'>
+      <div className="max-w-lg mx-auto mt-2 p-6 rounded-lg">
         <form>
           <div className="space-y-4">
             <div>
@@ -86,7 +84,7 @@ const Update = () => {
             </div>
             <div>
               <label htmlFor="foundDate" className="text-blck block font-semibold">Found Date</label>
-              <input value={formattedDate} onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="my-1 w-full px-3text-blck border-s-blue bg-white  py-2 border rounded-md focus:outline-none focus:border-blue-500" required/>
+              <input value={formattedDate} onChange={(e)=>setfoundDate(e.target.value)} type="date" id="foundDate" name="foundDate" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 "  required/>
             </div>
             <div>
               <label htmlFor="description" className="text-blck block font-semibold">Description</label>

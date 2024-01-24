@@ -48,7 +48,6 @@ export default function Insert(){
     e.preventDefault();
     setuploadingFile(true)
     data.forEach(async e => {
-      console.log(e.name, e.type, e.foundAt, e,foundDate, e.desc);
       const resp = await fetch('/api/items/insert', {
         method: "POST",
         body: JSON.stringify({
@@ -78,7 +77,6 @@ export default function Insert(){
       const sheetName = workbook.SheetNames[0]
       const sheet = workbook.Sheets[sheetName]
       const parsedData = XLSX.utils.sheet_to_json(sheet)
-      console.log(parsedData[0]);
       setdata(parsedData)
     }
   }
@@ -109,7 +107,7 @@ export default function Insert(){
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block font-semibold text-blck">Name</label>
-              <input onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-col-1 text-blck" required/>
+              <input onChange={(e)=>setname(e.target.value)} type="text" id="name" name="name" placeholder="Enter item name" className="bg-white my-1 w-full px-3 py-1 border rounded-md focus:outline-none border-s-blue focus:border-blue-500 text-blck" required/>
             </div>
             <div>
               <label htmlFor="type" className="block font-semibold text-blck">Type</label>

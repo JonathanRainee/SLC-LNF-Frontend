@@ -34,7 +34,6 @@ export default function Home({d}) {
   };
 
   const deleteItem = async (id: String) => {
-    console.log("delete");
     
     const resp = await fetch('/api/items/delete', {
       method: "DELETE",
